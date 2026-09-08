@@ -65,7 +65,6 @@
 
     <main class="main-content">
       <header class="topbar">
-    <div class="pwa-status" id="pwaStatus" aria-live="polite">🟢 Online</div>
   <div class="pwa-install-card hidden" id="pwaInstallCard" role="region" aria-label="Instalar aplicativo">
     <div><strong>📱 Tenha o Hub no celular</strong><span>Instale na tela inicial para abrir como um aplicativo.</span></div>
     <button class="secondary-button" id="pwaInstallBtn" type="button">📱 Instalar</button>
@@ -776,10 +775,6 @@
       var installBtn=document.getElementById("pwaInstallBtn");
       var installClose=document.getElementById("pwaInstallClose");
       function standalone(){return window.matchMedia && window.matchMedia("(display-mode: standalone)").matches || window.navigator.standalone===true;}
-      function setOnline(online){var el=document.getElementById("pwaStatus"); if(!el)return; el.textContent=online?"🟢 Online":"📴 Offline"; el.classList.toggle("offline",!online);}
-      window.addEventListener("online",function(){setOnline(true)});
-      window.addEventListener("offline",function(){setOnline(false)});
-      setOnline(navigator.onLine!==false);
       window.addEventListener("beforeinstallprompt",function(e){e.preventDefault(); deferredPrompt=e; if(!standalone()&&installCard)installCard.classList.remove("hidden");});
       window.addEventListener("appinstalled",function(){deferredPrompt=null; if(installCard)installCard.classList.add("hidden");});
       if(installBtn)installBtn.addEventListener("click",async function(){
