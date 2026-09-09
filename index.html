@@ -1,0 +1,906 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0f172a">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Gustavo Financial Hub">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <title>Gustavo Financial Hub</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<svg class="icon-sprite" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="i-home" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 10.8 12 3.9l8.5 6.9"/><path d="M5.5 9.8v10.1h13V9.8M9.1 19.9v-6.1h5.8v6.1"/></symbol>
+    <symbol id="i-wallet" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6.5h14.2A1.8 1.8 0 0 1 20 8.3v9.2a1.8 1.8 0 0 1-1.8 1.8H5.8A1.8 1.8 0 0 1 4 17.5z"/><path d="M4 8.4V6.8A2.8 2.8 0 0 1 6.8 4H17"/><path d="M20 11.2h-4.2a2 2 0 0 0 0 4H20M16 13.2h.01"/></symbol>
+    <symbol id="i-chart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5h16M5 17V6.5M6.5 15.5l4-4 3 2.4 5-6"/></symbol>
+    <symbol id="i-calendar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="5.5" width="16" height="15" rx="2"/><path d="M7.5 3.5v4M16.5 3.5v4M4 9.5h16M8 13h3M13 13h3M8 16.5h3"/></symbol>
+    <symbol id="i-plane" viewBox="0 0 24 24"><path d="M12 3.25c.7 0 1.1.48 1.1 1.15v5.05l6.45 2.45c.52.2.85.7.85 1.26v.42c0 .45-.37.82-.82.82H13.1v4.08l2.2 1.55c.34.24.54.63.54 1.05v.18c0 .44-.43.73-.84.56L12 20.86l-3 1.01c-.41.17-.84-.12-.84-.56v-.18c0-.42.2-.81.54-1.05l2.2-1.55v-4.08H4.42a.82.82 0 0 1-.82-.82v-.42c0-.56.33-1.06.85-1.26l6.45-2.45V4.4c0-.67.4-1.15 1.1-1.15Z"/><path d="M9.85 11.12 7.1 9.95M14.15 11.12l2.75-1.17"/></symbol>
+    <symbol id="i-map" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m3.5 5.2 5.5-2 6 2 5.5-2v15.6l-5.5 2-6-2-5.5 2z"/><path d="M9 3.2v15.6M15 5.2v15.6"/></symbol>
+    <symbol id="i-target" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.2"/><circle cx="12" cy="12" r="4.4"/><circle cx="12" cy="12" r="1.2"/></symbol>
+    <symbol id="i-bank" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 9.2 12 4l8.5 5.2v1.2h-17zM5.2 11.5v7M9.4 11.5v7M14.6 11.5v7M18.8 11.5v7M3.5 20.5h17"/></symbol>
+    <symbol id="i-settings" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8.2a3.8 3.8 0 1 0 0 7.6 3.8 3.8 0 0 0 0-7.6z"/><path d="m19.4 13.2 1.4 1-.1 1.9-1.7 1-1.7-1a8.4 8.4 0 0 1-1.9 1.1l-.3 2-1.7.8-1.6-1.1a8.1 8.1 0 0 1-2.3 0l-1.5 1.1-1.8-.8-.2-2a8.4 8.4 0 0 1-1.9-1.1l-1.8 1-1.6-1 .1-1.9 1.3-1a8.7 8.7 0 0 1 0-2.4l-1.3-1 .1-1.9 1.7-1 1.8 1a8.4 8.4 0 0 1 1.9-1.1l.2-2 1.8-.8 1.5 1.1a8.1 8.1 0 0 1 2.3 0l1.6-1.1 1.7.8.3 2a8.4 8.4 0 0 1 1.9 1.1l1.7-1 1.6 1-.1 1.9-1.4 1a8.7 8.7 0 0 1 0 2.4z"/></symbol>
+    <symbol id="i-more" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="12" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></symbol>
+    <symbol id="i-users" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="9" r="3.2"/><path d="M3.8 19c.4-3 2.1-4.6 5.2-4.6s4.8 1.6 5.2 4.6"/><path d="M15 7.1a2.7 2.7 0 0 1 0 5.1M16.1 14.3c2.2.1 3.6 1.5 4 3.8"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.8 19 6.5v5.2c0 4.4-2.4 7.2-7 9-4.6-1.8-7-4.6-7-9V6.5z"/><path d="m8.8 12 2.1 2.1 4.5-4.5"/></symbol>
+    <symbol id="i-transfer" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h12"/><path d="m12.5 3.7 3.5 3.3-3.5 3.3"/><path d="M20 17H8"/><path d="m11.5 20.3-3.5-3.3 3.5-3.3"/></symbol>
+    <symbol id="i-box" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m4 7 8-3 8 3-8 3z"/><path d="M4 7v10l8 3 8-3V7M12 10v10"/></symbol>
+    <symbol id="i-spark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.8v4.1M12 16.1v4.1M3.8 12h4.1M16.1 12h4.1M6.2 6.2l2.9 2.9M14.9 14.9l2.9 2.9M17.8 6.2l-2.9 2.9M9.1 14.9l-2.9 2.9"/><circle cx="12" cy="12" r="2.1"/></symbol>
+    <symbol id="i-edit" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m4.5 16.9-.8 3.4 3.4-.8L18 8.6l-2.6-2.6z"/><path d="m13.7 6.4 2.6 2.6 1.8-1.8a1.8 1.8 0 0 0-2.6-2.6z"/></symbol>
+    <symbol id="i-trash" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5.5 7.5h13M9 7.5V4.8h6v2.7M7 7.5l.7 12h8.6l.7-12M10 11v5.5M14 11v5.5"/></symbol>
+    <symbol id="i-pause" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 6v12M15.5 6v12"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6.5 8 5.5-8 5.5z"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="10.8" cy="10.8" r="6.4"/><path d="m16 16 4.3 4.3"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="m8.2 12.2 2.5 2.5 5.3-5.3"/></symbol>
+    <symbol id="i-alert" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m12 4 8.3 15H3.7z"/><path d="M12 9v4.5M12 16.4h.01"/></symbol>
+    <symbol id="i-info" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 10.5v5M12 7.8h.01"/></symbol>
+  </defs>
+</svg>
+
+  <div class="app-shell">
+    <aside class="sidebar" aria-label="Navegação principal">
+      <div class="brand">
+        <div class="brand-mark">G</div>
+        <div>
+          <div class="brand-name">Gustavo</div>
+          <div class="brand-sub">Financial Hub</div>
+        </div>
+      </div>
+
+      <nav class="main-nav">
+        <button class="nav-item active" data-page="dashboard"><span class="nav-icon"><svg class="line-icon" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><use href="#i-home"></use></svg></span><span>Início</span></button>
+        <button class="nav-item finance-nav" data-page="finance"><span class="nav-icon"><svg class="line-icon" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><use href="#i-wallet"></use></svg></span><span>Central</span></button>
+        <button class="nav-item planning-nav" data-page="planning"><span class="nav-icon"><svg class="line-icon" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><use href="#i-chart"></use></svg></span><span>Planejamento</span></button>
+        <button class="nav-item" data-page="commitments"><span class="nav-icon"><svg class="line-icon" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><use href="#i-calendar"></use></svg></span><span>Contas</span></button>
+        <button class="nav-item" data-page="money"><span class="nav-icon"><svg class="line-icon" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><use href="#i-wallet"></use></svg></span><span>Meu dinheiro</span></button>
+        <button class="nav-item" data-page="trips"><span class="nav-icon"><svg class="line-icon" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><use href="#i-plane"></use></svg></span><span>Viagens</span></button>
+        <button class="nav-item" data-page="goals"><span class="nav-icon"><svg class="line-icon" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><use href="#i-target"></use></svg></span><span>Objetivos</span></button>
+        <button class="nav-item" data-page="whatif"><span class="nav-icon"><svg class="line-icon" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><use href="#i-chart"></use></svg></span><span>E se...?</span></button>
+      </nav>
+
+      <div class="sidebar-bottom">
+        <button class="nav-item" data-page="salary"><span class="nav-icon"><svg class="line-icon" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><use href="#i-bank"></use></svg></span><span>Salário</span></button>
+        <button class="nav-item" data-page="settings"><span class="nav-icon"><svg class="line-icon" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><use href="#i-settings"></use></svg></span><span>Configurações</span></button>
+      </div>
+    </aside>
+
+    <nav class="mobile-bottom-nav" id="mobileBottomNav" aria-label="Navegação rápida">
+      <button class="mobile-nav-item active" data-page="dashboard" type="button"><span class="mobile-nav-icon"><svg class="line-icon" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><use href="#i-home"></use></svg></span><small>Início</small></button>
+      <button class="mobile-nav-item" data-page="finance" type="button"><span class="mobile-nav-icon"><svg class="line-icon" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><use href="#i-wallet"></use></svg></span><small>Central</small></button>
+      <button class="mobile-nav-item" data-page="planning" type="button"><span class="mobile-nav-icon"><svg class="line-icon" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><use href="#i-chart"></use></svg></span><small>Plano</small></button>
+      <button class="mobile-nav-item" data-page="trips" type="button"><span class="mobile-nav-icon"><svg class="line-icon" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><use href="#i-plane"></use></svg></span><small>Viagens</small></button>
+      <button class="mobile-nav-item" id="mobileMoreBtn" type="button" aria-expanded="false" aria-controls="mobileMoreMenu"><span class="mobile-nav-icon"><svg class="line-icon" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><use href="#i-more"></use></svg></span><small>Mais</small></button>
+    </nav>
+
+    <div class="mobile-more-backdrop hidden" id="mobileMoreBackdrop"></div>
+    <section class="mobile-more-menu hidden" id="mobileMoreMenu" aria-label="Mais áreas">
+      <div class="mobile-more-head"><strong>Mais</strong><button class="icon-button" id="mobileMoreClose" type="button" aria-label="Fechar menu">×</button></div>
+      <div class="mobile-more-grid">
+        <button class="mobile-more-item" data-page="commitments" type="button"><span class="more-icon"><svg class="line-icon" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><use href="#i-calendar"></use></svg></span><strong>Contas</strong></button>
+        <button class="mobile-more-item" data-page="money" type="button"><span class="more-icon"><svg class="line-icon" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><use href="#i-wallet"></use></svg></span><strong>Meu dinheiro</strong></button>
+        <button class="mobile-more-item" data-page="goals" type="button"><span class="more-icon"><svg class="line-icon" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><use href="#i-target"></use></svg></span><strong>Objetivos</strong></button>
+        <button class="mobile-more-item" data-page="whatif" type="button"><span class="more-icon"><svg class="line-icon" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><use href="#i-chart"></use></svg></span><strong>E se...?</strong></button>
+        <button class="mobile-more-item" data-page="salary" type="button"><span class="more-icon"><svg class="line-icon" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><use href="#i-bank"></use></svg></span><strong>Salário</strong></button>
+        <button class="mobile-more-item" data-page="settings" type="button"><span class="more-icon"><svg class="line-icon" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><use href="#i-settings"></use></svg></span><strong>Configurações</strong></button>
+      </div>
+    </section>
+
+    <main class="main-content">
+      <header class="topbar">
+  <div class="pwa-install-card hidden" id="pwaInstallCard" role="region" aria-label="Instalar aplicativo">
+    <div><strong>Tenha o Hub no celular</strong><span>Instale na tela inicial para abrir como um aplicativo.</span></div>
+    <button class="secondary-button" id="pwaInstallBtn" type="button">Instalar</button>
+    <button class="icon-button" id="pwaInstallClose" type="button" aria-label="Fechar aviso de instalação">×</button>
+  </div>
+
+        <div>
+          <div class="eyebrow" id="todayLabel">SETEMBRO 2026</div>
+          <h1 id="pageTitle">Seu painel financeiro</h1>
+        </div>
+        <div class="top-actions">
+          <button class="icon-button" id="quickSalaryTop" title="Registrar salário" aria-label="Registrar salário"><svg class="line-icon" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><use href="#i-bank"></use></svg></button><button class="icon-button" id="quickExpenseTop" title="Adicionar gasto" aria-label="Adicionar gasto"><svg class="line-icon" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><use href="#i-plus"></use></svg></button>
+          <div class="avatar">GA</div>
+        </div>
+      </header>
+
+      <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+      <section class="page active" id="page-dashboard">
+        <div class="hero-note">
+          <div>
+            <div class="hero-kicker">O que importa hoje</div>
+            <h2 id="dashboardGreeting">Você está no controle.</h2>
+            <p id="dashboardMessage">Veja de forma simples onde seu dinheiro está indo e quanto ainda pode usar.</p>
+          </div>
+          <button class="primary-button" data-page="money">Posso gastar</button>
+        </div>
+
+        <div class="money-strip">
+          <div><span>Você recebeu</span><strong id="dashIncome">€0</strong></div>
+          <div><span>Você gastou</span><strong id="dashSpent">€0</strong></div>
+          <div><span>Você guardou</span><strong id="dashSaved">€0</strong></div>
+          <div><span>Ainda pode gastar</span><strong id="dashCanSpend">€0</strong></div>
+          <div><span>Capital livre</span><strong id="dashFree">€0</strong><small class="money-hint">Sobra após o planejamento.</small></div>
+        </div>
+
+        <div class="grid cards-4">
+          <div class="stat-card accent-blue">
+            <span>Reserva de emergência</span>
+            <strong id="emergencyCard">€0</strong>
+            <small id="emergencyMeta">0% da meta</small>
+            <div class="progress"><span id="emergencyBar"></span></div>
+          </div>
+          <div class="stat-card accent-purple">
+            <span>Casa Espanha</span>
+            <strong id="houseCard">€0</strong>
+            <small id="houseMeta">0% da meta</small>
+            <div class="progress"><span id="houseBar"></span></div>
+          </div>
+          <div class="stat-card accent-green">
+            <span><svg class="line-icon small-title-icon" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><use href="#i-plane"></use></svg> Fundo de viagens</span>
+            <strong id="travelCard">€0</strong>
+            <small id="travelMeta">Aportes €0</small>
+            <div class="progress"><span id="travelBar"></span></div>
+          </div>
+          <div class="stat-card accent-orange">
+            <span>Patrimônio</span>
+            <strong id="netWorthCard">€0</strong>
+            <small>Disponível + reservas + investimentos</small>
+          </div>
+          <div class="stat-card accent-blue world-stat-card">
+            <span>Meu mundo</span>
+            <strong id="worldCard">0 países</strong>
+            <small id="worldMeta">0 novos em 2026</small>
+            <button class="text-button" data-page="trips">Ver meu mapa →</button>
+          </div>
+          <div class="stat-card accent-indigo finance-stat-card">
+            <span>Posso gastar</span>
+            <strong id="financeSpendCard">€0</strong>
+            <small id="financeSpendMeta">Disponível neste mês</small>
+            <button class="text-button" data-page="finance">Abrir Central →</button>
+          </div>
+          <div class="stat-card accent-slate commitment-stat-card">
+            <span>Próximas contas</span>
+            <strong id="commitmentDashTotal">€0</strong>
+            <small id="commitmentDashMeta">0 pagamentos</small>
+            <button class="text-button" data-page="commitments">Ver compromissos →</button>
+          </div>
+          <div class="stat-card accent-indigo planning-stat-card">
+            <span>Seu plano</span>
+            <strong id="planningDash12">€0</strong>
+            <small id="planningDashMeta">patrimônio em 12 meses</small>
+            <button class="text-button" data-page="planning">Ver planejamento →</button>
+          </div>
+        </div>
+
+        <div class="panel dashboard-allocation-summary-panel">
+          <div class="panel-head"><div><span class="panel-kicker">Seu salário</span><h3>Para onde vai o seu dinheiro?</h3></div><button class="text-button" data-page="planning">Ver distribuição →</button></div>
+          <div id="dashboardAllocationSummary" class="dashboard-allocation-summary"></div>
+        </div>
+
+        <div class="grid two-col">
+          <div class="panel">
+            <div class="panel-head">
+              <div><span class="panel-kicker">Visão do mês</span><h3>Dinheiro recebido × gasto × guardado</h3></div>
+              <select id="chartMonthSelect" class="small-select" aria-label="Mês do gráfico"></select>
+            </div>
+            <canvas id="monthlyChart" height="220"></canvas>
+          </div>
+          <div class="panel">
+            <div class="panel-head"><div><span class="panel-kicker">Direção</span><h3>Para onde o dinheiro foi?</h3></div></div>
+            <canvas id="categoryChart" height="220"></canvas>
+          </div>
+        </div>
+
+        <div class="grid two-col">
+          <div class="panel">
+            <div class="panel-head"><div><span class="panel-kicker">Foco</span><h3>Seu próximo objetivo</h3></div><button class="text-button" data-page="goals">Ver todos</button></div>
+            <div id="nextGoalBox" class="mission-box"></div>
+          </div>
+          <div class="panel">
+            <div class="panel-head"><div><span class="panel-kicker">Próxima</span><h3>Próxima viagem</h3></div><button class="text-button" data-page="trips">Planejar</button></div>
+            <div id="nextTripBox" class="mission-box"></div>
+          </div>
+        </div>
+
+        <div class="panel recommendation-panel">
+          <div class="panel-head"><div><span class="panel-kicker">Assistente</span><h3>O que faço com meu dinheiro?</h3></div></div>
+          <div id="moneyPlan" class="plan-grid"></div>
+        </div>
+      </section>
+
+      <section class="page" id="page-finance">
+        <div class="section-title-row finance-section-head">
+          <div><span class="panel-kicker">Central financeira</span><h2>Entenda o seu dinheiro em poucos segundos</h2><p class="muted section-subtitle">Tudo aqui é calculado a partir dos dados que você já registra no Hub.</p></div>
+          <div class="finance-month-nav" aria-label="Navegação do mês">
+            <button class="secondary-button" id="financePrevMonth" aria-label="Mês anterior">‹</button>
+            <strong id="financeMonthLabel">Setembro 2026</strong>
+            <button class="secondary-button" id="financeNextMonth" aria-label="Próximo mês">›</button>
+          </div>
+        </div>
+
+        <div class="finance-hero">
+          <div>
+            <span class="panel-kicker">Decisão principal</span>
+            <h3 id="financeSpendTitle">Você pode gastar com segurança</h3>
+            <div class="finance-spend-value" id="financeSpendValue">€0</div>
+            <p id="financeSpendText">Calculando seu mês...</p>
+          </div>
+          <div class="finance-health-pill" id="financeHealthPill">Saudável</div>
+        </div>
+
+        <div class="grid cards-4 finance-kpi-grid">
+          <div class="mini-card"><span>Entrada do mês</span><strong id="financeIncome">€0</strong><small id="financeIncomeMeta">Previsto</small></div>
+          <div class="mini-card"><span>Gastos</span><strong id="financeSpent">€0</strong><small id="financeSpentMeta">Realizados</small></div>
+          <div class="mini-card"><span>Guardado</span><strong id="financeSaved">€0</strong><small id="financeSavedMeta">Planejado + realizado</small></div>
+          <div class="mini-card"><span>Capital livre</span><strong id="financeFree">€0</strong><small id="financeFreeMeta">Sobra após o planejamento.</small></div>
+        </div>
+
+        <div class="grid two-col">
+          <div class="panel">
+            <div class="panel-head"><div><span class="panel-kicker">Fluxo do mês</span><h3>Para onde seu dinheiro está indo</h3></div></div>
+            <div id="financeFlow" class="finance-flow"></div>
+          </div>
+          <div class="panel">
+            <div class="panel-head"><div><span class="panel-kicker">Fim do mês</span><h3>Como você deve terminar o mês</h3></div></div>
+            <div id="financeMonthProjection" class="finance-projection"></div>
+          </div>
+        </div>
+
+        <div class="grid two-col">
+          <div class="panel">
+            <div class="panel-head"><div><span class="panel-kicker">Ritmo</span><h3>Quanto posso gastar por dia?</h3></div></div>
+            <div class="daily-spend-box"><strong id="financeDailySpend">€0</strong><span id="financeDaysLeft">0 dias restantes</span><p>É uma referência do planejamento, não um limite bancário.</p></div>
+          </div>
+          <div class="panel">
+            <div class="panel-head"><div><span class="panel-kicker">O que vem aí</span><h3>Próximos compromissos</h3></div></div>
+            <div id="financeCommitments" class="commitment-list"></div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-head"><div><span class="panel-kicker">Calendário financeiro</span><h3>Seu mês em movimento</h3></div></div>
+          <div id="financeTimeline" class="finance-timeline"></div>
+        </div>
+
+        <div class="grid two-col">
+          <div class="panel">
+            <div class="panel-head"><div><span class="panel-kicker">Saúde financeira</span><h3>Você está indo bem?</h3></div></div>
+            <div class="health-score-wrap"><div class="health-score" id="financeHealthScore">0</div><div><strong id="financeHealthTitle">Calculando...</strong><p id="financeHealthText">Analisando seu mês.</p></div></div><div id="financeHealthReasons" class="health-reasons"></div>
+          </div>
+          <div class="panel">
+            <div class="panel-head"><div><span class="panel-kicker">Atenção</span><h3>O que merece sua atenção</h3></div></div>
+            <div id="financeAlerts" class="alert-list"></div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-head"><div><span class="panel-kicker">Decisões rápidas</span><h3>Teste uma decisão sem alterar seus dados</h3></div></div>
+          <div class="finance-quick-actions">
+            <button class="secondary-button" id="financeSpendSimulatorBtn">E se eu gastar...</button>
+            <button class="secondary-button" id="financeSalarySimulatorBtn">E se meu salário fosse...</button>
+          </div>
+          <div id="financeQuickResult" class="finance-quick-result"></div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-head"><div><span class="panel-kicker">Próximos 3 meses</span><h3>Planejado × realizado × livre</h3></div></div>
+          <div class="finance-table-wrap"><table class="finance-table"><thead><tr><th>Mês</th><th>Entrada</th><th>Saídas</th><th>Guardado</th><th>Livre</th></tr></thead><tbody id="financeThreeMonthBody"></tbody></table></div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-head"><div><span class="panel-kicker">12 meses</span><h3>Como seu dinheiro pode evoluir</h3></div></div>
+          <canvas id="financeYearChart" height="220"></canvas>
+          <div id="financeYearSummary" class="finance-year-summary"></div>
+        </div>
+      </section>
+
+
+      <section class="page" id="page-planning">
+        <div class="section-title-row">
+          <div><span class="panel-kicker">Planejamento</span><h2>Veja onde seu plano atual pode levar você</h2><p class="muted section-subtitle">Projeções, metas e cenários baseados no que você já cadastrou. Nada aqui altera seus dados reais.</p></div>
+        </div>
+
+        <section class="allocation-panel allocation-planning-editor" aria-labelledby="allocationTitleHeading">
+          <div class="allocation-panel-head">
+            <div>
+              <span class="panel-kicker">Planejamento mensal</span>
+              <h3 id="allocationTitleHeading">Para onde vai meu salário?</h3>
+              <p class="muted">Defina os destinos do mês. Edite os valores diretamente; isso altera o planejamento, não cria movimentos reais.</p>
+            </div>
+            <div class="allocation-month-nav" aria-label="Mês da distribuição">
+              <button class="icon-button" id="allocationPrevMonth" type="button" aria-label="Mês anterior">‹</button>
+              <select id="allocationMonthSelect" class="small-select" aria-label="Mês da distribuição"></select>
+              <button class="icon-button" id="allocationNextMonth" type="button" aria-label="Próximo mês">›</button>
+              <button class="primary-button" id="addAllocationBtn" type="button">＋ Adicionar destino</button>
+            </div>
+          </div>
+
+          <div class="allocation-overview">
+            <div class="allocation-salary-number"><span>Salário líquido</span><strong id="allocationIncome">€0</strong><small>real recebido primeiro; depois o planejado</small></div>
+            <div class="allocation-overview-item"><span>Planejado</span><strong id="allocationTotal">€0</strong></div>
+            <div class="allocation-overview-item highlight"><span>Livre</span><strong id="allocationFree">€0</strong></div>
+            <div class="allocation-overview-item"><span>Posso gastar</span><strong id="allocationSpendable">€0</strong><small>já considerando o restante do planejamento</small></div>
+          </div>
+
+          <div class="allocation-progress-wrap">
+            <div class="allocation-progress-meta"><span>Salário distribuído</span><strong><span id="allocationPercent">0%</span></strong></div>
+            <div class="allocation-progress"><span id="allocationProgressBar"></span></div>
+          </div>
+          <div id="allocationDeficit" class="allocation-deficit hidden" role="alert"></div>
+
+          <div id="allocationList" class="allocation-list"></div>
+
+          <div class="allocation-flow-shell">
+            <div class="panel-head"><div><span class="panel-kicker">Fluxo</span><h4>Do salário para os seus destinos</h4></div><span class="muted">Planejamento, não movimento real.</span></div>
+            <div id="allocationFlow" class="allocation-flow"></div>
+          </div>
+        </section>
+
+        <div class="planning-hero">
+          <div class="planning-hero-main"><span class="panel-kicker">Seu plano financeiro</span><h3>Projeção baseada no seu plano atual</h3><div class="planning-hero-values"><div><span>Patrimônio atual</span><strong id="planningCurrentNetWorth">€0</strong></div><div><span>Em 12 meses</span><strong id="planning12NetWorth">€0</strong></div><div><span>Evolução prevista</span><strong id="planning12Growth">€0</strong></div></div></div>
+          <div class="planning-hero-note" id="planningHeadline">Vamos olhar primeiro para onde você está e depois para onde está indo.</div>
+        </div>
+
+        <div class="grid planning-kpi-grid">
+          <div class="mini-card"><span>Onde estou?</span><strong id="planningWhereNow">€0</strong><small>patrimônio estimado hoje</small></div>
+          <div class="mini-card"><span>Onde chego?</span><strong id="planningWhereLater">€0</strong><small>projeção em 12 meses</small></div>
+          <div class="mini-card"><span>Metas no ritmo</span><strong id="planningGoalsOnTrack">0/0</strong><small id="planningGoalsOnTrackMeta">objetivos ativos</small></div>
+          <div class="mini-card"><span>Viagens futuras</span><strong id="planningTripNeed">€0</strong><small>necessidade adicional projetada</small></div>
+        </div>
+
+        <div class="planning-level-title"><span>Agora</span><h3>O que está acontecendo?</h3></div>
+        <div class="grid two-col">
+          <div class="panel">
+            <div class="panel-head"><div><span class="panel-kicker">Linha do tempo</span><h3>3, 6 e 12 meses</h3></div></div>
+            <div id="planningTimeline" class="planning-timeline"></div>
+          </div>
+          <div class="panel">
+            <div class="panel-head"><div><span class="panel-kicker">Trajetória</span><h3>Patrimônio projetado</h3></div></div>
+            <canvas id="planningProjectionChart" height="240"></canvas>
+            <p class="planning-footnote">Os valores são projeções. Não representam garantia de resultado.</p>
+          </div>
+        </div>
+
+        <div class="planning-level-title"><span>Entender</span><h3>Minhas metas estão no ritmo?</h3></div>
+        <div class="grid two-col">
+          <div class="panel">
+            <div class="panel-head"><div><span class="panel-kicker">Objetivos</span><h3>Progresso das metas</h3></div><button class="text-button" data-page="goals">Abrir objetivos →</button></div>
+            <div id="planningGoalsList" class="planning-goals-list"></div>
+          </div>
+          <div class="panel">
+            <div class="panel-head"><div><span class="panel-kicker">Diagnóstico</span><h3>O que precisa mudar?</h3></div></div>
+            <div id="planningGoalAdvice" class="planning-advice"></div>
+          </div>
+        </div>
+
+        <div class="planning-level-title"><span>Planejar</span><h3>Teste caminhos diferentes</h3></div>
+        <div class="grid two-col">
+          <div class="panel planning-scenario-panel">
+            <div class="panel-head"><div><span class="panel-kicker">Cenários</span><h3>Conservador · Base · Otimista</h3></div></div>
+            <div class="scenario-tabs planning-scenario-tabs"><button class="scenario active" data-planning-scenario="base">Base</button><button class="scenario" data-planning-scenario="conservative">Conservador</button><button class="scenario" data-planning-scenario="optimistic">Otimista</button></div>
+            <div id="planningScenarioCopy" class="scenario-copy"></div>
+            <div class="planning-input-grid">
+              <label>Receita mensal <input id="planningScenarioIncome" type="number" min="0" step="10"></label>
+              <label>Gasto mensal <input id="planningScenarioExpense" type="number" min="0" step="10"></label>
+              <label>Valor mensal guardado <input id="planningScenarioSaving" type="number" min="0" step="10"></label>
+              <label>Aporte mensal de investimento <input id="planningScenarioInvestment" type="number" min="0" step="10"></label>
+            </div>
+            <div id="planningScenarioResult" class="planning-scenario-result"></div>
+          </div>
+          <div class="panel">
+            <div class="panel-head"><div><span class="panel-kicker">Ajustar plano</span><h3>Se eu mudar o ritmo...</h3></div></div>
+            <div class="planning-adjust-grid">
+              <label>Guardar por mês<input id="planningAdjustSaving" type="number" min="0" step="10"></label>
+              <label>Gastar por mês<input id="planningAdjustExpense" type="number" min="0" step="10"></label>
+            </div>
+            <div id="planningAdjustResult" class="planning-adjust-result"></div>
+          </div>
+        </div>
+
+        <div class="grid two-col">
+          <div class="panel">
+            <div class="panel-head"><div><span class="panel-kicker">Viagens</span><h3>Impacto das viagens no plano</h3></div><button class="text-button" data-page="trips">Ver viagens →</button></div>
+            <div id="planningTravelSummary" class="planning-summary-box"></div>
+          </div>
+          <div class="panel">
+            <div class="panel-head"><div><span class="panel-kicker">Compromissos</span><h3>O que já está comprometido</h3></div><button class="text-button" data-page="commitments">Ver contas →</button></div>
+            <div id="planningCommitmentSummary" class="planning-summary-box"></div>
+          </div>
+        </div>
+
+        <div class="panel planning-month-panel">
+          <div class="panel-head"><div><span class="panel-kicker">Plano mensal</span><h3>Próximos meses</h3></div></div>
+          <div class="finance-table-wrap"><table class="finance-table"><thead><tr><th>Mês</th><th>Entrada</th><th>Compromissos</th><th>Guardado</th><th>Livre</th></tr></thead><tbody id="planningMonthsBody"></tbody></table></div>
+        </div>
+      </section>
+
+      <section class="page" id="page-commitments">
+        <div class="section-title-row">
+          <div><span class="panel-kicker">Contas & compromissos</span><h2>Saiba o que ainda vai sair do seu dinheiro</h2><p class="muted section-subtitle">Uma conta prevista não vira gasto até você realmente marcar o pagamento.</p></div>
+          <div class="button-row"><select id="commitmentMonthSelect" class="small-select" aria-label="Mês dos compromissos"></select><button class="primary-button" id="addCommitmentBtn">＋ Novo compromisso</button></div>
+        </div>
+        <div class="grid cards-4 commitment-kpi-grid">
+          <div class="mini-card"><span>Total previsto</span><strong id="commitmentMonthTotal">€0</strong><small>Vencimentos do mês</small></div>
+          <div class="mini-card"><span>Pago</span><strong id="commitmentMonthPaid">€0</strong><small>Já saiu do dinheiro</small></div>
+          <div class="mini-card"><span>Restante</span><strong id="commitmentMonthRemaining">€0</strong><small>Ainda precisa pagar</small></div>
+          <div class="mini-card"><span>Atrasado</span><strong id="commitmentMonthOverdue">0</strong><small>Compromissos vencidos</small></div>
+        </div>
+        <div class="grid two-col">
+          <div class="panel">
+            <div class="panel-head"><div><span class="panel-kicker">⏭️ Próximos pagamentos</span><h3>O que vem primeiro</h3></div></div>
+            <div id="commitmentUpcomingList" class="commitment-list"></div>
+          </div>
+          <div class="panel">
+            <div class="panel-head"><div><span class="panel-kicker">Gastos recorrentes</span><h3>Seus compromissos fixos</h3></div></div>
+            <div id="commitmentRecurringList" class="commitment-list"></div>
+            <div id="commitmentRecurringTotal" class="commitment-recurring-total"></div>
+          </div>
+        </div>
+        <div class="panel">
+          <div class="panel-head">
+            <div><span class="panel-kicker">Meus compromissos</span><h3>Contas e parcelas</h3></div>
+            <div class="button-row commitment-filters">
+              <select id="commitmentFilter" class="small-select" aria-label="Filtro de compromissos"><option value="all">Todas</option><option value="upcoming">Próximas</option><option value="paid">Pagas</option><option value="overdue">Atrasadas</option><option value="recurring">Recorrentes</option><option value="inactive">Inativas</option></select>
+            </div>
+          </div>
+          <div id="commitmentGrid" class="commitment-grid"></div>
+        </div>
+        <div class="panel">
+          <div class="panel-head"><div><span class="panel-kicker">Visão anual</span><h3>Quanto seus compromissos representam</h3></div></div>
+          <div id="commitmentAnnualSummary" class="commitment-annual-summary"></div>
+        </div>
+      </section>
+
+      <section class="page" id="page-money">
+        <div class="section-title-row">
+          <div><span class="panel-kicker">Meu dinheiro</span><h2>Orçamento simples, sem complicação</h2></div>
+          <div class="button-row"><button class="secondary-button" id="spendCheckBtn">Posso gastar</button><button class="primary-button" id="addExpenseBtn">＋ Adicionar gasto</button></div>
+        </div>
+
+        <div class="grid cards-4">
+          <div class="mini-card"><span>Receita do mês</span><strong id="moneyIncome">€0</strong></div>
+          <div class="mini-card"><span>Despesas</span><strong id="moneySpent">€0</strong></div>
+          <div class="mini-card"><span>Poupança / objetivos</span><strong id="moneySaved">€0</strong></div>
+          <div class="mini-card"><span>Capital livre planejado</span><strong id="moneyFree">€0</strong></div>
+        </div>
+
+
+
+        <div class="panel budget-panel">
+          <div class="panel-head budget-panel-head"><div><span class="panel-kicker">Orçamento mensal</span><h3 id="budgetMonthLabel">Orçamento do mês</h3></div><div class="budget-panel-actions"><button class="secondary-button small-action" id="addBudgetCategoryBtn" type="button"><svg class="action-icon" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><use href="#i-plus"></use></svg> Adicionar</button><div class="budget-month-controls"><button class="icon-button" id="budgetPrevMonth" type="button" aria-label="Mês anterior">‹</button><span class="status-pill info" id="budgetMonthStatus">Mês atual</span><button class="icon-button" id="budgetNextMonth" type="button" aria-label="Próximo mês">›</button></div></div></div>
+          <div class="budget-table-wrap">
+            <table class="budget-table">
+              <thead><tr><th>Categoria</th><th>Planejado</th><th>Realizado</th><th>Restante</th><th>Status</th><th aria-label="Ações"></th></tr></thead>
+              <tbody id="budgetBody"></tbody>
+            </table>
+          </div>
+          <div id="budgetArchivedWrap"></div>
+        </div>
+
+        <div class="grid two-col">
+          <div class="panel">
+            <div class="panel-head"><div><span class="panel-kicker">Rápido</span><h3>Gasto rápido</h3></div></div>
+            <div class="quick-grid">
+              <button data-quick-category="Alimentação"><svg class="line-icon" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><use href="#i-wallet"></use></svg> Alimentação</button>
+              <button data-quick-category="Família"><svg class="line-icon" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><use href="#i-users"></use></svg> Família</button>
+              <button data-quick-category="Viagens"><svg class="line-icon" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><use href="#i-plane"></use></svg> Viagem</button>
+              <button data-quick-category="Lazer"><svg class="line-icon" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><use href="#i-spark"></use></svg> Lazer</button>
+              <button data-quick-category="Casa"><svg class="line-icon" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><use href="#i-home"></use></svg> Casa</button>
+              <button data-quick-category="Brasil"><svg class="line-icon" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><use href="#i-transfer"></use></svg> Brasil</button>
+              <button data-quick-category="Outros"><svg class="line-icon" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><use href="#i-box"></use></svg> Outros</button>
+            </div>
+          </div>
+          <div class="panel">
+            <div class="panel-head"><div><span class="panel-kicker">Últimos lançamentos</span><h3>O que aconteceu</h3></div></div>
+            <div id="recentTransactions" class="transaction-list"></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="page" id="page-trips">
+        <div class="section-title-row">
+          <div><span class="panel-kicker">Minhas viagens</span><h2>Viajar sem bagunçar o resto</h2><p class="muted section-subtitle">Planeje o custo, veja se cabe no fundo e acompanhe o que realmente gastou.</p></div>
+          <div class="button-row"><select id="tripYearSelect" class="small-select" aria-label="Ano das viagens"></select><button class="primary-button" id="addTripBtn">＋ Nova viagem</button></div>
+        </div>
+        <div class="trip-banner trip-banner-rich">
+          <div><span><svg class="line-icon small-title-icon" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><use href="#i-plane"></use></svg> Fundo de viagens</span><strong id="tripFundBig">€0</strong><small id="tripFundAdvice">Aporte planejado: €250/mês</small></div>
+          <div class="trip-target"><span>Meta do ano</span><strong id="tripGoalCount">0 / 9</strong><small>viagens realizadas / desejadas</small></div>
+          <div class="trip-target"><span>Orçamento anual</span><strong id="tripAnnualBudget">€3.000</strong><small>limite configurável</small></div>
+          <div class="trip-target"><span>Planejado</span><strong id="tripAnnualPlanned">€0</strong><small id="tripAnnualProgressLabel">€0 / €3.000</small></div>
+          <div class="trip-target"><span>Gasto real</span><strong id="tripAnnualActual">€0</strong><small>viagens realizadas</small></div>
+          <div class="trip-target"><span>Ainda disponível</span><strong id="tripAnnualAvailable">€3.000</strong><small>considerando viagens planejadas</small></div>
+          <div class="trip-target"><span>Próxima viagem</span><strong id="tripNextCost">€0</strong><small id="tripNextAfter">Nenhuma viagem</small></div>
+        </div>
+
+        <div class="grid two-col travel-overview-grid">
+          <div class="panel">
+            <div class="panel-head"><div><span class="panel-kicker">Orçamento do ano</span><h3>Quanto do seu limite já está comprometido?</h3></div></div>
+            <div class="large-progress"><span id="tripAnnualProgress"></span></div>
+            <p class="muted compact-note">“Planejado” considera viagens não canceladas. O fundo mostra o dinheiro já separado para viajar.</p>
+            <div class="travel-settings-row">
+              <label>Limite anual (€)<input id="tripYearBudgetInput" type="number" min="0" step="50" value="3000"></label>
+              <label>Meta de viagens<input id="tripYearGoalInput" type="number" min="0" step="1" value="9"></label>
+              <button class="secondary-button" id="saveTravelYearConfigBtn">Salvar ano</button>
+            </div>
+          </div>
+          <div class="panel">
+            <div class="panel-head"><div><span class="panel-kicker">Visão rápida</span><h3>Como está o seu plano?</h3></div></div>
+            <div class="travel-health" id="travelHealthBox"></div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-head"><div><span class="panel-kicker">Calendário</span><h3>Meu ano de viagens</h3></div></div>
+          <div id="tripCalendar" class="calendar"></div>
+        </div>
+
+        <div class="panel world-map-panel">
+          <div class="panel-head world-map-head">
+            <div>
+              <span class="panel-kicker">Meu mapa do mundo</span>
+              <h3>Os países que eu já conheci</h3>
+              <p class="muted section-subtitle">Clique em um país para marcar como visitado, consultar seu histórico ou desfazer a marcação.</p>
+            </div>
+            <div class="world-map-stat">
+              <strong id="worldVisitedCount">0 / 195</strong>
+              <span id="worldVisitedPercent">0% do mundo</span>
+            </div>
+          </div>
+          <div class="world-tools">
+            <div class="world-search-wrapper">
+              <label class="world-search"><svg class="line-icon" aria-hidden="true" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><use href="#i-search"></use></svg><input id="countrySearchInput" type="search" placeholder="Procurar país…" autocomplete="off"></label>
+              <div id="countrySearchResults" class="country-search-results hidden"></div>
+            </div>
+            <div class="world-legend"><span><i class="legend-dot unvisited"></i>Ainda não fui</span><span><i class="legend-dot visited"></i>Já fui</span></div>
+          </div>
+          <div class="world-map-wrap" id="worldMapViewport">
+  <div class="world-map-controls" aria-label="Controles do mapa">
+    <button type="button" class="map-control" id="worldMapZoomIn" title="Aumentar zoom" aria-label="Aumentar zoom">＋</button>
+    <button type="button" class="map-control" id="worldMapZoomOut" title="Diminuir zoom" aria-label="Diminuir zoom">−</button>
+    <button type="button" class="map-control map-control-wide" id="worldMapReset" title="Ver mundo inteiro" aria-label="Ver mundo inteiro"><svg class="line-icon" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><use href="#i-map"></use></svg></button>
+  </div>
+  <div class="world-map-viewport">
+    <svg id="worldMap" class="world-map" viewBox="0 0 1200 560" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Mapa-múndi interativo"></svg>
+  </div>
+  <div class="world-map-hint">Scroll para zoom · arraste para navegar · volta ao mundo inteiro</div>
+</div>
+          <div class="world-summary-grid">
+            <div class="world-summary-card"><span>Países visitados</span><strong id="worldSummaryVisited">0</strong></div>
+            <div class="world-summary-card"><span><svg class="line-icon small-title-icon" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><use href="#i-map"></use></svg> Novos países em <span id="worldSummaryYear">2026</span></span><strong id="worldSummaryNew">0</strong></div>
+            <div class="world-summary-card"><span>Viagens internacionais em <span id="worldSummaryTripYear">2026</span></span><strong id="worldSummaryInternational">0</strong></div>
+            <div class="world-summary-card"><span>Canárias exploradas</span><strong id="worldSummaryIslands">0 / 7</strong></div>
+          </div>
+          <div class="world-lists">
+            <div><h4>Países visitados</h4><div id="visitedCountryList" class="country-list"></div></div>
+            <div><h4>Ainda quero conhecer</h4><div id="unvisitedCountryList" class="country-list"></div></div>
+          </div>
+        </div>
+
+        <div class="panel travel-filter-panel">
+          <div class="panel-head"><div><span class="panel-kicker">Filtros</span><h3>Ver minhas viagens</h3></div></div>
+          <div class="trip-filters">
+            <button class="filter-chip active" data-trip-filter="all">Todas</button>
+            <button class="filter-chip" data-trip-filter="planejando">Planejando</button>
+            <button class="filter-chip" data-trip-filter="reservado">Reservadas</button>
+            <button class="filter-chip" data-trip-filter="realizada">Realizadas</button>
+            <button class="filter-chip" data-trip-filter="cancelada">Canceladas</button>
+            <button class="filter-chip" data-trip-filter="canarias">🇪🇸 Canárias</button>
+            <button class="filter-chip" data-trip-filter="europa">🇪🇺 Europa</button>
+            <button class="filter-chip" data-trip-filter="brasil">🇧🇷 Brasil</button>
+            <button class="filter-chip" data-trip-filter="internacional">Internacional</button>
+          </div>
+        </div>
+
+        <div class="trip-grid" id="tripGrid"></div>
+
+        <div class="grid two-col travel-charts-grid">
+          <div class="panel"><div class="panel-head"><div><span class="panel-kicker">Custos</span><h3>Para onde o dinheiro das viagens está indo?</h3></div></div><canvas id="travelCategoryChart" height="220"></canvas></div>
+          <div class="panel"><div class="panel-head"><div><span class="panel-kicker">Evolução</span><h3>Gasto real de viagens por mês</h3></div></div><canvas id="travelMonthChart" height="220"></canvas></div>
+        </div>
+
+        <div class="grid two-col">
+          <div class="panel">
+            <div class="panel-head"><div><span class="panel-kicker">Canárias</span><h3>Ilhas visitadas</h3></div></div>
+            <p class="muted compact-note">Só para acompanhar sua meta pessoal de conhecer todas as ilhas.</p>
+            <div id="islandsChecklist" class="islands-checklist"></div>
+          </div>
+          <div class="panel">
+            <div class="panel-head"><div><span class="panel-kicker">Como pensar</span><h3>Seu fundo não é uma despesa</h3></div></div>
+            <div class="tip-box"><strong>Primeiro você separa. Depois você viaja.</strong><p>Os €250 planejados por mês vão para o fundo de viagens. Quando uma viagem é paga, o valor sai desse fundo — não é contado duas vezes.</p></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="page" id="page-goals">
+        <div class="section-title-row">
+          <div><span class="panel-kicker">Meus objetivos</span><h2>Transforme vontade em missão</h2></div>
+          <button class="primary-button" id="addGoalBtn">＋ Novo objetivo</button>
+        </div>
+        <div class="grid cards-3" id="goalGrid"></div>
+      </section>
+
+      <section class="page" id="page-whatif">
+        <div class="section-title-row">
+          <div><span class="panel-kicker">E SE...?</span><h2>Veja como pequenas decisões mudam seu futuro</h2></div>
+        </div>
+        <div class="simulator-layout">
+          <div class="panel simulator-controls">
+            <div class="control-group"><label for="simSalary">Salário líquido mensal</label><div class="range-line"><input id="simSalary" type="range" min="1000" max="4000" step="50"><strong id="simSalaryValue">€1.448</strong></div></div>
+            <div class="control-group"><label for="simRaise">Aumento salarial</label><div class="range-line"><input id="simRaise" type="range" min="0" max="30" step="1"><strong id="simRaiseValue">0%</strong></div></div>
+            <div class="control-group"><label for="simBonus">Bônus anual</label><div class="range-line"><input id="simBonus" type="range" min="0" max="5000" step="100"><strong id="simBonusValue">€0</strong></div></div>
+            <div class="control-group"><label for="simTravel">Orçamento de viagens por mês</label><div class="range-line"><input id="simTravel" type="range" min="100" max="500" step="50"><strong id="simTravelValue">€250</strong></div></div>
+            <div class="control-group"><label for="simHouse">Aporte para casa por mês</label><div class="range-line"><input id="simHouse" type="range" min="0" max="600" step="50"><strong id="simHouseValue">€100</strong></div></div>
+            <div class="control-group"><label for="simBrazil">Aporte para Brasil por mês</label><div class="range-line"><input id="simBrazil" type="range" min="0" max="600" step="50"><strong id="simBrazilValue">€100</strong></div></div>
+          </div>
+          <div class="panel simulator-results">
+            <div class="scenario-tabs"><button class="scenario active" data-scenario="conservative">Conservador</button><button class="scenario" data-scenario="base">Base</button><button class="scenario" data-scenario="optimistic">Otimista</button></div>
+            <div class="scenario-copy" id="scenarioCopy"></div>
+            <canvas id="projectionChart" height="250"></canvas>
+            <div class="projection-grid" id="projectionGrid"></div>
+          </div>
+        </div>
+        <div class="panel compare-panel">
+          <div class="panel-head"><div><span class="panel-kicker"><svg class="line-icon small-title-icon" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><use href="#i-plane"></use></svg> Viajar mais</span><h3>Quanto custa acelerar as viagens?</h3></div></div>
+          <div class="travel-scenarios" id="travelScenarios"></div>
+        </div>
+      </section>
+
+      <section class="page" id="page-salary">
+        <div class="section-title-row">
+          <div><span class="panel-kicker">Meu salário</span><h2>O que entra na sua conta</h2></div>
+          <button class="primary-button" id="registerSalaryBtn">Registrar salário</button>
+        </div>
+        <div class="grid two-col salary-layout">
+          <div class="panel form-panel">
+            <h3>Salário padrão</h3>
+            <p class="muted">Esta é a referência usada quando um mês ainda não tem uma nómina registrada.</p>
+            <label>Bruto anual <input id="salaryGrossAnnual" type="number" min="0" step="100"></label>
+            <label>Bruto mensal <input id="salaryGrossMonthly" type="number" min="0" step="10"></label>
+            <label>Segurança Social mensal <input id="salarySS" type="number" min="0" step="1"></label>
+            <label>IRPF mensal <input id="salaryIRPF" type="number" min="0" step="1"></label>
+            <label>Outros descontos mensais <input id="salaryOther" type="number" min="0" step="1"></label>
+            <button class="primary-button" id="saveSalaryBtn">Salvar salário padrão</button>
+            <div class="tip-box"><strong>Como funciona</strong><p>O salário padrão preenche os meses sem nómina. Quando você registrar o valor real de um mês, o Dashboard passa a usar o valor recebido naquele mês.</p></div>
+          </div>
+          <div class="panel salary-card-panel">
+            <span class="panel-kicker">Estimativa atual</span>
+            <div class="salary-stack"><div><span>Bruto</span><strong id="salaryGrossView">€0</strong></div><div class="minus">− <span>Segurança Social</span><strong id="salarySSView">€0</strong></div><div class="minus">− <span>IRPF</span><strong id="salaryIRPFView">€0</strong></div><div class="minus">− <span>Outros</span><strong id="salaryOtherView">€0</strong></div><div class="net"><span>Líquido</span><strong id="salaryNetView">€0</strong></div></div>
+            <div class="review-box"><strong>Revisão salarial</strong><p>Defina quando um novo salário planejado passa a valer. Os meses anteriores ficam intactos.</p><div class="review-row"><label>A partir de <input id="salaryPlanFrom" type="month" value="2027-01"></label><label>Novo líquido <input id="salaryPlanNet" type="number" min="0" step="10" placeholder="Ex.: 1550"></label></div><button class="secondary-button full" id="saveSalaryPlanBtn">Salvar novo salário planejado</button><div class="review-row" style="margin-top:12px"><label>Comparar com salário atual <input id="newSalaryInput" type="number" min="0" step="10" placeholder="Ex.: 1550"></label><button class="secondary-button" id="compareSalaryBtn">Comparar</button></div><div id="salaryCompareResult"></div></div>
+          </div>
+        </div>
+
+        <div class="panel" style="margin-top:16px">
+          <div class="panel-head">
+            <div><span class="panel-kicker">Minhas nóminas</span><h3>Planejado × recebido</h3></div>
+            <select id="salaryHistoryYear" class="small-select" aria-label="Ano do histórico"></select>
+          </div>
+          <div id="salaryRecordsList" class="salary-records-list"></div>
+        </div>
+
+        <div class="panel" style="margin-top:16px">
+          <div class="panel-head"><div><span class="panel-kicker">Evolução</span><h3>Salário líquido</h3></div></div>
+          <canvas id="salaryChart" height="220"></canvas>
+        </div>
+      </section>
+
+      <section class="page" id="page-settings">
+        <div class="section-title-row"><div><span class="panel-kicker"><svg class="line-icon small-title-icon" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><use href="#i-settings"></use></svg> Configurações</span><h2>Deixe o Hub com a sua cara</h2></div></div>
+        <div class="grid two-col">
+          <div class="panel form-panel"><h3>Perfil</h3><label>Nome<input id="settingsName" type="text"></label><label>Localização<input id="settingsLocation" type="text"></label><label>Salário líquido mensal padrão<input id="settingsNetSalary" type="number" min="0" step="1"></label><label>Taxa EUR/BRL<input id="settingsFx" type="number" min="0" step="0.01"></label><button class="primary-button" id="saveSettingsBtn">Salvar configurações</button></div>
+          <div class="panel"><h3>Seus dados</h3><p class="muted">Tudo fica no navegador deste dispositivo. Exporte um backup de tempos em tempos.</p><div class="button-stack"><button class="secondary-button" id="exportBtn">⬇ Exportar backup</button><label class="file-button secondary-button">⬆ Importar backup<input id="importInput" type="file" accept="application/json"></label><button class="danger-button" id="resetBtn">↺ Restaurar dados iniciais</button></div><div class="tip-box"><strong>Você sabia?</strong><p>Uma transferência para uma reserva é dinheiro que mudou de lugar — não uma despesa. Por isso o Hub separa “gastei” de “guardei”.</p></div></div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div class="modal hidden" id="expenseModal" role="dialog" aria-modal="true" aria-labelledby="expenseTitle">
+    <div class="modal-card"><button class="modal-close" data-close="expenseModal">×</button><span class="panel-kicker">＋ Novo lançamento</span><h2 id="expenseTitle">Adicionar gasto</h2><form id="expenseForm"><label>Quanto?<input id="expenseAmount" type="number" min="0.01" step="0.01" required placeholder="80"></label><label>Categoria<select id="expenseCategory"></select></label><label>Data<input id="expenseDate" type="date" required></label><label>Descrição <span class="optional">opcional</span><input id="expenseDescription" type="text" maxlength="80" placeholder="Ex.: supermercado"></label><button class="primary-button full" type="submit">Salvar gasto</button></form></div>
+  </div>
+
+  <div class="modal hidden" id="spendModal" role="dialog" aria-modal="true" aria-labelledby="spendTitle">
+    <div class="modal-card"><button class="modal-close" data-close="spendModal">×</button><span class="panel-kicker">Decisão rápida</span><h2 id="spendTitle">Posso gastar?</h2><p class="muted">Digite o valor e eu olho o seu mês antes de responder.</p><label>Quero gastar<input id="spendAmount" type="number" min="0.01" step="0.01" placeholder="80"></label><button class="primary-button full" id="analyzeSpendBtn">Analisar</button><div id="spendResult" class="spend-result"></div></div>
+  </div>
+
+  <datalist id="countryOptions"></datalist>
+
+  <div class="modal hidden" id="tripModal" role="dialog" aria-modal="true" aria-labelledby="tripTitle">
+    <div class="modal-card modal-card-wide">
+      <button class="modal-close" data-close="tripModal">×</button>
+      <span class="panel-kicker">Minha viagem</span>
+      <h2 id="tripTitle">Planejar viagem</h2>
+      <p class="muted">Você informa os valores; o Hub calcula o total e verifica se a viagem cabe no seu planejamento.</p>
+      <form id="tripForm">
+        <input id="tripId" type="hidden">
+        <div class="two-inputs"><label>Nome da viagem<input id="tripDestination" type="text" required maxlength="80" placeholder="Ex.: Fim de semana em Lisboa"></label><label>Destino / país<input id="tripCountry" type="text" maxlength="60" placeholder="Portugal" list="countryOptions"></label></div>
+        <div class="two-inputs"><label>Tipo<select id="tripType"><option value="canarias">Canárias</option><option value="europa">Europa</option><option value="brasil">Brasil</option><option value="internacional">Internacional</option><option value="outro">Outro</option></select></label><label>Ilha / região <span class="optional">opcional</span><input id="tripIsland" type="text" maxlength="60" placeholder="Ex.: Tenerife"></label></div>
+        <div class="two-inputs"><label>Data de ida<input id="tripStart" type="date"></label><label>Data de volta<input id="tripEnd" type="date"></label></div>
+        <div class="trip-duration-line"><span>Duração</span><strong id="tripDuration">—</strong></div>
+        <div class="trip-budget-editor">
+          <div class="form-section-title">Orçamento da viagem</div>
+          <div class="two-inputs"><label>Transporte<input id="trip_transport" type="number" min="0" step="0.01" value="0"></label><label>Hospedagem<input id="trip_accommodation" type="number" min="0" step="0.01" value="0"></label></div>
+          <div class="two-inputs"><label>Alimentação<input id="trip_food" type="number" min="0" step="0.01" value="0"></label><label>Transporte local<input id="trip_localTransport" type="number" min="0" step="0.01" value="0"></label></div>
+          <div class="two-inputs"><label>Passeios / atividades<input id="trip_activities" type="number" min="0" step="0.01" value="0"></label><label>Outros<input id="trip_other" type="number" min="0" step="0.01" value="0"></label></div>
+          <div class="trip-total-box"><span>Custo estimado</span><strong id="tripEstimatedCost">€0,00</strong></div>
+        </div>
+        <div class="two-inputs"><label>Quanto realmente gastei? <span class="optional">pode preencher depois</span><input id="tripActual" type="number" min="0" step="0.01" value="0"></label><label>Status<select id="tripStatus"><option value="ideia">Ideia</option><option value="planejando" selected>Planejando</option><option value="reservado">Reservado</option><option value="realizada">Realizada</option><option value="cancelada">Cancelada</option></select></label></div>
+        <label>Observações <span class="optional">opcional</span><textarea id="tripNotes" maxlength="300" placeholder="Ex.: já comprei a passagem"></textarea></label>
+        <div class="trip-viability-preview" id="tripViabilityPreview">Preencha orçamento e data para ver a análise.</div>
+        <button class="primary-button full" type="submit">Salvar viagem</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="modal hidden" id="commitmentModal" role="dialog" aria-modal="true" aria-labelledby="commitmentTitle">
+    <div class="modal-card">
+      <button class="modal-close" data-close="commitmentModal">×</button>
+      <span class="panel-kicker">Novo compromisso</span><h2 id="commitmentTitle">Criar compromisso</h2>
+      <form id="commitmentForm">
+        <input id="commitmentId" type="hidden">
+        <label>Nome<input id="commitmentName" type="text" required maxlength="80" placeholder="Ex.: Internet"></label>
+        <div class="two-inputs"><label>Categoria<select id="commitmentCategory"><option>Moradia</option><option>Alimentação</option><option>Transporte</option><option>Comunicação</option><option>Assinaturas</option><option>Saúde</option><option>Educação</option><option>Família</option><option>Parcelas</option><option>Seguros</option><option>Impostos</option><option>Outros</option></select></label><label>Valor<input id="commitmentAmount" type="number" min="0" step="0.01" value="0" required></label></div>
+        <label class="check-line"><input id="commitmentVariable" type="checkbox"> Valor variável (defino o valor a cada mês)</label><label class="check-line"><input id="commitmentIncludedInBudget" type="checkbox"> Já está dentro do meu orçamento mensal</label>
+        <div class="two-inputs"><label>Frequência<select id="commitmentFrequency"><option value="once">Única</option><option value="weekly">Semanal</option><option value="biweekly">Quinzenal</option><option value="monthly" selected>Mensal</option><option value="yearly">Anual</option></select></label><label>Primeiro vencimento<input id="commitmentStartDate" type="date" required></label></div>
+        <div class="two-inputs"><label>Data final <span class="optional">opcional</span><input id="commitmentEndDate" type="date"></label><label>Método <span class="optional">opcional</span><input id="commitmentPaymentMethod" type="text" maxlength="40" placeholder="Ex.: débito"></label></div>
+        <div class="installment-box"><label class="check-line"><input id="commitmentInstallmentEnabled" type="checkbox"> É parcelado</label><div id="commitmentInstallmentFields" class="two-inputs hidden"><label>Total de parcelas<input id="commitmentInstallmentTotal" type="number" min="1" step="1" value="1"></label><label>Valor por parcela<input id="commitmentInstallmentAmount" type="number" min="0" step="0.01" value="0"></label></div></div>
+        <label>Observações <span class="optional">opcional</span><textarea id="commitmentNotes" maxlength="220" placeholder="Ex.: renovar em janeiro"></textarea></label>
+        <button class="primary-button full" type="submit">Salvar compromisso</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="modal hidden" id="commitmentPaymentModal" role="dialog" aria-modal="true" aria-labelledby="commitmentPaymentTitle">
+    <div class="modal-card">
+      <button class="modal-close" data-close="commitmentPaymentModal">×</button>
+      <span class="panel-kicker">Pagamento</span><h2 id="commitmentPaymentTitle">Registrar pagamento</h2>
+      <input id="commitmentPaymentId" type="hidden"><input id="commitmentPaymentDate" type="hidden">
+      <div id="commitmentPaymentInfo" class="result-card info"></div>
+      <label>Valor pago<input id="commitmentPaymentAmount" type="number" min="0" step="0.01" required></label>
+      <label>Status<select id="commitmentPaymentStatus"><option value="paid">Pago</option><option value="cancelled">Cancelado</option><option value="planned">Previsto</option></select></label>
+      <label>Observação <span class="optional">opcional</span><input id="commitmentPaymentNote" type="text" maxlength="120" placeholder="Ex.: pago via débito"></label>
+      <button class="primary-button full" id="saveCommitmentPaymentBtn" type="button">Salvar pagamento</button>
+    </div>
+  </div>
+
+  <div class="modal hidden" id="goalModal" role="dialog" aria-modal="true" aria-labelledby="goalTitle">
+    <div class="modal-card"><button class="modal-close" data-close="goalModal">×</button><span class="panel-kicker">Novo objetivo</span><h2 id="goalTitle">Criar missão</h2><form id="goalForm"><label>Objetivo<input id="goalName" type="text" required placeholder="Ex.: Reserva de emergência"></label><div class="two-inputs"><label>Meta (€)<input id="goalTarget" type="number" min="1" step="100" required placeholder="10000"></label><label>Já tenho (€)<input id="goalCurrent" type="number" min="0" step="50" value="0"></label></div><div class="two-inputs"><label>Aporte mensal (€)<input id="goalMonthly" type="number" min="0" step="10" value="100"></label><label>Prazo em meses<input id="goalMonths" type="number" min="1" step="1" value="12"></label></div><label>Prioridade<select id="goalPriority"><option>alta</option><option selected>média</option><option>baixa</option></select></label><button class="primary-button full" type="submit">Salvar objetivo</button></form></div>
+  </div>
+
+
+  <div class="modal hidden" id="budgetCategoryModal" role="dialog" aria-modal="true" aria-labelledby="budgetCategoryTitle">
+    <div class="modal-card">
+      <button class="modal-close" data-close="budgetCategoryModal" type="button" aria-label="Fechar">×</button>
+      <span class="panel-kicker">Orçamento mensal</span>
+      <h2 id="budgetCategoryTitle">Adicionar categoria</h2>
+      <p id="budgetCategoryHelp" class="muted">A categoria passa a fazer parte dos orçamentos futuros sem criar nenhuma transação.</p>
+      <form id="budgetCategoryForm">
+        <input id="budgetCategoryId" type="hidden">
+        <label>Nome<input id="budgetCategoryName" type="text" required maxlength="50" placeholder="Ex.: Saúde"></label>
+        <div class="two-inputs"><label>Valor mensal<input id="budgetCategoryAmount" type="number" min="0" step="1" inputmode="decimal" value="0"></label><label>Tipo<select id="budgetCategoryType"><option value="expense">Despesa</option><option value="saving">Poupança</option><option value="travel">Viagem</option><option value="investment">Investimento</option><option value="transfer">Transferência</option></select></label></div>
+        <button class="primary-button full" type="submit">Salvar categoria</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="modal hidden" id="allocationModal" role="dialog" aria-modal="true" aria-labelledby="allocationTitle">
+    <div class="modal-card">
+      <button class="modal-close" data-close="allocationModal" type="button" aria-label="Fechar">×</button>
+      <span class="panel-kicker">Distribuição mensal</span>
+      <h2 id="allocationTitle">Adicionar destino</h2>
+      <p id="allocationExceptionHint" class="muted">A regra será aplicada automaticamente aos meses futuros; nenhuma transação real será criada.</p>
+      <form id="allocationForm">
+        <input id="allocationId" type="hidden">
+        <input id="allocationMonth" type="hidden">
+        <label>Nome<input id="allocationName" type="text" maxlength="60" required placeholder="Ex.: Brasil"></label>
+        <div class="two-inputs"><label>Tipo<select id="allocationType"><option value="expense">Despesa</option><option value="saving" selected>Poupança</option><option value="travel">Viagem</option><option value="investment">Investimento</option><option value="transfer">Transferência</option></select></label><label>Destino<select id="allocationCategory"></select></label></div>
+        <label>Valor padrão mensal (€)<input id="allocationAmount" type="number" min="0" step="1" required placeholder="200"></label>
+        <div class="allocation-month-override-fields">
+          <label class="check-row allocation-override-toggle"><input id="allocationUseOverride" type="checkbox"><span>Usar valor diferente neste mês</span></label>
+          <label id="allocationOverrideLabel">Valor deste mês (€)<input id="allocationOverrideAmount" type="number" min="0" step="1" placeholder="200"></label>
+        </div>
+        <div class="two-inputs"><label>Prioridade<input id="allocationPriority" type="number" min="0" step="1" value="0" inputmode="numeric"></label><label class="check-row allocation-active-field"><input id="allocationActive" type="checkbox" checked><span>Ativo</span></label></div>
+        <label>Observações <span class="optional">opcional</span><textarea id="allocationNotes" maxlength="200" placeholder="Ex.: valor que quero enviar todos os meses"></textarea></label>
+        <button class="primary-button full" type="submit">Salvar destino</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="modal hidden" id="salaryRecordModal" role="dialog" aria-modal="true" aria-labelledby="salaryRecordTitle">
+    <div class="modal-card">
+      <button class="modal-close" data-close="salaryRecordModal">×</button>
+      <span class="panel-kicker">Nómina mensal</span>
+      <h2 id="salaryRecordTitle">Registrar nómina</h2>
+      <p class="muted">Informe o que estava previsto e o que realmente entrou na conta.</p>
+      <form id="salaryRecordForm">
+        <input id="salaryRecordId" type="hidden">
+        <label>Mês<input id="payMonth" type="month" required></label>
+        <div class="two-inputs"><label>Salário bruto<input id="payGross" type="number" min="0" step="0.01" required></label><label>Segurança Social<input id="paySS" type="number" min="0" step="0.01" value="0"></label></div>
+        <div class="two-inputs"><label>IRPF<input id="payIRPF" type="number" min="0" step="0.01" value="0"></label><label>Outros descontos<input id="payOther" type="number" min="0" step="0.01" value="0"></label></div>
+        <div class="calculated-net"><span>Líquido calculado</span><strong id="payNetCalculated">€0,00</strong></div>
+        <label>Líquido recebido <span class="optional">pode ajustar</span><input id="payNetReceived" type="number" min="0" step="0.01" placeholder="Calculado automaticamente"></label>
+        <div class="two-inputs"><label>Data de recebimento<input id="payPaymentDate" type="date"></label><label>Status<select id="payStatus"><option value="planned">Previsto</option><option value="received" selected>Recebido</option><option value="partial">Parcial</option><option value="not_received">Não recebido</option></select></label></div>
+        <label>Rendimentos extras <span class="optional">opcional</span><input id="payExtraIncome" type="number" min="0" step="0.01" value="0" placeholder="Bônus, comissão..."/></label>
+        <label>Observações <span class="optional">opcional</span><input id="payNotes" type="text" maxlength="120" placeholder="Ex.: primeiro salário"></label>
+        <div class="formula-note">Líquido = bruto − Segurança Social − IRPF − outros descontos.</div>
+        <button class="primary-button full" type="submit">Salvar nómina</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="modal hidden" id="countryModal" role="dialog" aria-modal="true" aria-labelledby="countryModalTitle">
+    <div class="modal-card">
+      <button class="modal-close" data-close="countryModal">×</button>
+      <span class="panel-kicker">Meu mapa</span>
+      <h2 id="countryModalTitle">País</h2>
+      <div id="countryModalStatus" class="country-modal-status"></div>
+      <form id="countryForm">
+        <input id="countryCodeInput" type="hidden">
+        <label>Primeira visita <span class="optional">opcional</span><input id="countryFirstVisit" type="month"></label>
+        <label>Última visita <span class="optional">opcional</span><input id="countryLastVisit" type="month"></label>
+        <label>Número de viagens <span class="optional">opcional</span><input id="countryTripCount" type="number" min="1" step="1" placeholder="Ex.: 2"></label>
+        <label>Observação <span class="optional">opcional</span><textarea id="countryNotes" maxlength="240" placeholder="Ex.: primeira vez em Lisboa"></textarea></label>
+        <div class="button-row">
+          <button class="secondary-button full" type="button" id="countryUnmarkBtn">Desmarcar como visitado</button>
+          <button class="primary-button full" type="submit">Salvar país visitado</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="modal hidden" id="countrySuggestionModal" role="dialog" aria-modal="true" aria-labelledby="countrySuggestionTitle">
+    <div class="modal-card">
+      <button class="modal-close" data-close="countrySuggestionModal">×</button>
+      <div class="welcome-icon" aria-hidden="true"><svg class="line-icon" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><use href="#i-wallet"></use></svg></div>
+      <span class="panel-kicker">Novo país</span>
+      <h2 id="countrySuggestionTitle">Você esteve em um país novo!</h2>
+      <p id="countrySuggestionText" class="muted">Deseja marcar este país como visitado?</p>
+      <div class="button-row">
+        <button class="secondary-button full" id="countrySuggestionNo" type="button">Agora não</button>
+        <button class="primary-button full" id="countrySuggestionYes" type="button">Sim, marcar</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal hidden" id="financeSpendModal" role="dialog" aria-modal="true" aria-labelledby="financeSpendModalTitle">
+    <div class="modal-card"><button class="modal-close" data-close="financeSpendModal">×</button><span class="panel-kicker">Simulação</span><h2 id="financeSpendModalTitle">E se eu gastar...?</h2><p class="muted">Nada será alterado. É só um teste para você tomar uma decisão.</p><label>Quero gastar<input id="financeSimSpendAmount" type="number" min="0.01" step="0.01" placeholder="200"></label><div id="financeSimSpendResult" class="finance-sim-result"></div><button class="primary-button full" data-close="financeSpendModal" type="button">Fechar</button></div>
+  </div>
+
+  <div class="modal hidden" id="financeSalaryModal" role="dialog" aria-modal="true" aria-labelledby="financeSalaryModalTitle">
+    <div class="modal-card"><button class="modal-close" data-close="financeSalaryModal">×</button><span class="panel-kicker">Simulação</span><h2 id="financeSalaryModalTitle">E se meu salário fosse...</h2><p class="muted">Compare um salário novo com o planejamento atual sem alterar sua nómina.</p><label>Novo salário líquido mensal<input id="financeSimSalaryAmount" type="number" min="0" step="10" placeholder="1600"></label><div id="financeSimSalaryResult" class="finance-sim-result"></div><button class="primary-button full" data-close="financeSalaryModal" type="button">Fechar</button></div>
+  </div>
+
+  <div class="modal hidden" id="onboardingModal" role="dialog" aria-modal="true" aria-labelledby="onboardingTitle">
+    <div class="modal-card onboarding"><div class="welcome-icon" aria-hidden="true"><svg class="line-icon" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><use href="#i-wallet"></use></svg></div><span class="panel-kicker">GUSTAVO FINANCIAL HUB</span><h2 id="onboardingTitle">Vamos configurar seu dinheiro.</h2><p>Eu já trouxe uma configuração inicial baseada no seu plano. Você poderá editar tudo depois.</p><div class="onboarding-summary"><div><span>Salário líquido</span><strong>€1.448</strong></div><div><span>Viagens</span><strong>€250/mês</strong></div><div><span>Capital livre</span><strong>€441/mês</strong></div></div><button class="primary-button full" id="startHubBtn">Começar</button><button class="text-button full" id="keepDefaultsBtn">Usar configuração inicial</button></div>
+  </div>
+
+  <script src="world-map-data.js"></script>
+  <script src="app.js"></script>
+  <script>
+    (function(){
+      var deferredPrompt=null;
+      var installCard=document.getElementById("pwaInstallCard");
+      var installBtn=document.getElementById("pwaInstallBtn");
+      var installClose=document.getElementById("pwaInstallClose");
+      function standalone(){return window.matchMedia && window.matchMedia("(display-mode: standalone)").matches || window.navigator.standalone===true;}
+      window.addEventListener("beforeinstallprompt",function(e){e.preventDefault(); deferredPrompt=e; if(!standalone()&&installCard)installCard.classList.remove("hidden");});
+      window.addEventListener("appinstalled",function(){deferredPrompt=null; if(installCard)installCard.classList.add("hidden");});
+      if(installBtn)installBtn.addEventListener("click",async function(){
+        if(deferredPrompt){ deferredPrompt.prompt(); try{await deferredPrompt.userChoice;}catch(e){} deferredPrompt=null; if(installCard)installCard.classList.add("hidden"); return; }
+        if(/iphone|ipad|ipod/i.test(navigator.userAgent) && !standalone()){ alert("No iPhone/iPad: use Compartilhar → Adicionar à Tela de Início."); }
+      });
+      if(installClose)installClose.addEventListener("click",function(){if(installCard)installCard.classList.add("hidden"); localStorage.setItem("gfh_pwa_install_dismissed","1");});
+      if(localStorage.getItem("gfh_pwa_install_dismissed")==="1" && installCard)installCard.classList.add("hidden");
+      var ios=/iphone|ipad|ipod/i.test(navigator.userAgent);
+      if(ios && !standalone() && localStorage.getItem("gfh_pwa_install_dismissed")!=="1" && installCard){ installCard.classList.remove("hidden"); installBtn && (installBtn.textContent="Como instalar"); }
+      if("serviceWorker" in navigator){ window.addEventListener("load",function(){ navigator.serviceWorker.register("service-worker.js").catch(function(){}); }); }
+    })();
+  </script>
+</body>
+</html>
